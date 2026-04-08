@@ -4,7 +4,7 @@ use App\Models\User;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-test('profile page is displayed', function () {
+test('プロフィールページが表示される', function () {
     $user = User::factory()->create();
 
     $response = $this
@@ -14,7 +14,7 @@ test('profile page is displayed', function () {
     $response->assertOk();
 });
 
-test('profile information can be updated', function () {
+test('プロフィール情報を更新できる', function () {
     $user = User::factory()->create();
 
     $response = $this
@@ -35,7 +35,7 @@ test('profile information can be updated', function () {
     expect($user->email_verified_at)->toBeNull();
 });
 
-test('email verification status is unchanged when the email address is unchanged', function () {
+test('メールアドレスが変更されない場合はメール認証状態が維持される', function () {
     $user = User::factory()->create();
 
     $response = $this
@@ -52,7 +52,7 @@ test('email verification status is unchanged when the email address is unchanged
     expect($user->refresh()->email_verified_at)->not->toBeNull();
 });
 
-test('user can delete their account', function () {
+test('ユーザーは自分のアカウントを削除できる', function () {
     $user = User::factory()->create();
 
     $response = $this
@@ -69,7 +69,7 @@ test('user can delete their account', function () {
     expect($user->fresh())->toBeNull();
 });
 
-test('correct password must be provided to delete account', function () {
+test('アカウント削除には正しいパスワードが必要', function () {
     $user = User::factory()->create();
 
     $response = $this

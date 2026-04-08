@@ -2,7 +2,7 @@
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-test('returns a successful response', function () {
+test('正常なレスポンスを返す', function () {
     $response = $this->get(route('home'));
 
     $response->assertOk();

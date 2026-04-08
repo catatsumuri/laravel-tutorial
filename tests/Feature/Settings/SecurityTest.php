@@ -7,7 +7,7 @@ use Laravel\Fortify\Features;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 
-test('security page is displayed', function () {
+test('セキュリティページが表示される', function () {
     $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
 
     Features::twoFactorAuthentication([
@@ -27,7 +27,7 @@ test('security page is displayed', function () {
         );
 });
 
-test('security page requires password confirmation when enabled', function () {
+test('セキュリティページはパスワード確認が有効な場合に確認を要求する', function () {
     $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
 
     $user = User::factory()->create();
@@ -43,7 +43,7 @@ test('security page requires password confirmation when enabled', function () {
     $response->assertRedirect(route('password.confirm'));
 });
 
-test('security page does not require password confirmation when disabled', function () {
+test('セキュリティページはパスワード確認が無効な場合に確認を要求しない', function () {
     $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
 
     $user = User::factory()->create();
@@ -61,7 +61,7 @@ test('security page does not require password confirmation when disabled', funct
         );
 });
 
-test('security page renders without two factor when feature is disabled', function () {
+test('二段階認証機能が無効の場合はセキュリティページに二段階認証が表示されない', function () {
     $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
 
     config(['fortify.features' => []]);
@@ -79,7 +79,7 @@ test('security page renders without two factor when feature is disabled', functi
         );
 });
 
-test('password can be updated', function () {
+test('パスワードを変更できる', function () {
     $user = User::factory()->create();
 
     $response = $this
@@ -98,7 +98,7 @@ test('password can be updated', function () {
     expect(Hash::check('new-password', $user->refresh()->password))->toBeTrue();
 });
 
-test('correct password must be provided to update password', function () {
+test('パスワード変更には正しい現在のパスワードが必要', function () {
     $user = User::factory()->create();
 
     $response = $this
